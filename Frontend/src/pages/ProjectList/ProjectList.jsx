@@ -4,9 +4,13 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { MagnifyingGlassIcon, MixerHorizontalIcon } from "@radix-ui/react-icons";
+import {
+  MagnifyingGlassIcon,
+  MixerHorizontalIcon,
+} from "@radix-ui/react-icons";
 import { Input } from "@/components/ui/input";
-import React from "react";
+import React, { useState } from "react";
+import ProjectCard from "../Project/ProjectCard";
 
 const tags = [
   "All",
@@ -28,12 +32,13 @@ const tags = [
 ];
 
 const ProjectList = () => {
+  const [keyword, setKeyword] = useState("");
   const handleFilterChange = (section, value) => {
     console.log("value", value, section);
   };
-  const handleSearchChange=()=>{
-
-  }
+  const handleSearchChange = (e) => {
+    setKeyword(e.target.value);
+  };
   return (
     <>
       <div className="relative px-5 lg:px-0 lg:flex gap-5 justify-center py-5">
@@ -104,11 +109,21 @@ const ProjectList = () => {
           {/*Projects Section */}
           <div className="flex gap-2 items-center pb-5 justify-between">
             <div className="relative p-0 w-full">
-              <Input 
-              onChange={handleSearchChange}
-              placeholder='Search Project'
-              className="40% px-9" />
+              <Input
+                onChange={handleSearchChange}
+                placeholder="Search Project"
+                className="40% px-9"
+              />
               <MagnifyingGlassIcon className="absolute top-3 left-4" />
+            </div>
+          </div>
+          <div>
+            <div className="space-y-5 min-h-[74vh]">
+              {keyword
+                ? [1, 1, 1].map((item) => <ProjectCard key={item}/>)
+                : [1, 1, 1, 1, 1].map((item) => (
+                  <ProjectCard key={item}/>
+                  ))}
             </div>
           </div>
         </section>
