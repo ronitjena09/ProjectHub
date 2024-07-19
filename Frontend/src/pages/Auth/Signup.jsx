@@ -3,24 +3,26 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from "@/component
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 
-const Signup = () => {
-    const form = useForm({
-        defaultValues: {
-          email: "",
-          password:"",
-          fullName:"",
+const Signup = ({ setActive }) => {
+  const form = useForm({
+    defaultValues: {
+      email: "",
+      password: "",
+      fullName: "",
+    },
+  });
 
-        },
-      });
-      const onSubmit = (data) => {
-        console.log("Sign Up Details:", data);
-      };
+  const onSubmit = (data) => {
+    console.log("Sign Up Details:", data);
+    setActive(false);
+  };
+
   return (
     <div className="space-y-5">
-        <h1>Register</h1>
-         <Form {...form}>
+      <h1 className="mb-4 text-2xl font-bold">Register</h1>
+      <Form {...form}>
         <form className="space-y-5" onSubmit={form.handleSubmit(onSubmit)}>
-        <FormField
+          <FormField
             control={form.control}
             name="fullName"
             render={({ field }) => (
@@ -54,7 +56,7 @@ const Signup = () => {
               </FormItem>
             )}
           />
-        <FormField
+          <FormField
             control={form.control}
             name="password"
             render={({ field }) => (
@@ -71,13 +73,13 @@ const Signup = () => {
               </FormItem>
             )}
           />
-              <Button type="submit" className="w-full mt-5">
-                Register
-              </Button>
+          <Button type="submit" className="w-full mt-5">
+            Register
+          </Button>
         </form>
       </Form>
     </div>
-  )
-}
+  );
+};
 
-export default Signup
+export default Signup;
